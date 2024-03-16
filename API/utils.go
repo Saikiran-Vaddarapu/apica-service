@@ -5,9 +5,8 @@ import (
 	"time"
 )
 
-// cleanupExpiredEntries periodically checks for and removes expired cache entries.
 func (c *LRUCache) cleanupExpiredEntries() {
-	cleanupTicker := time.NewTicker(time.Minute) // Adjust the interval as needed
+	cleanupTicker := time.NewTicker(time.Minute)
 	defer cleanupTicker.Stop()
 
 	for {
@@ -24,7 +23,6 @@ func (c *LRUCache) cleanupExpiredEntries() {
 	}
 }
 
-// expired checks if the cache entry has expired.
 func (e CacheEntry) expired() bool {
 	return !e.expiration.IsZero() && time.Now().After(e.expiration)
 }
