@@ -21,6 +21,11 @@ func (cache *LRUCache) POST(w http.ResponseWriter, r *http.Request) {
 	key := r.FormValue("key")
 	value := r.FormValue("value")
 	expirationString := r.FormValue("expiration")
+	if expirationString == ""{
+		http.Error(w, "expiration field is required", http.StatusBadRequest)
+		return
+	}
+	
 	var expiration time.Time
 	if expirationString != "" {
 		var err error
